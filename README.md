@@ -7,13 +7,13 @@ Steps to run:
   Put name of gems in gems.properties
   Run gradle -q gemJar
 ```
-The jar with the gems can now be found in dist/libSass.jar (The name can be updated in build.gradle)
+The jar with the gems can now be found in dist/sassJar.jar (The name can be updated in build.gradle)
 
 To have programmatic access to those jars, can then do:
 
 ```bash
   cd dist/
-  java -jar jruby* -rlibSass.jar -S irb
+  java -jar jruby* -r./sassJar.jar -S irb
 ```
 
 This will open the ruby shell.  You should then be able to require the necessary gems.
