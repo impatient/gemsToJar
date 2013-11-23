@@ -1,0 +1,46 @@
+apply plugin: 'java'
+
+def gemJarName ="sassJar"
+
+repositories { 
+  mavenCentral()
+}
+
+dependencies {
+  runtime group: 'org.jruby', name: 'jruby-complete', version: '1.7.8' 
+
+
+}
+
+task getRuby(type: Copy) {
+ into "dist"
+ from configurations.runtime
+}
+
+task buildJarDir(dependsOn: getRuby) << {
+   new File("dist/"+gemJarName).mkdir()
+
+}
+
+task installGems(dependsOn: buildJarDir) <<  { 
+
+  def gems = new File('gems.properties')
+  gems.eachLine {
+	println "Searching for " + it
+	def sout = new StringBuffer(), serr = new StringBuffer()
+	def proc = ['java', '-jar', 'jruby-complete-1.7.8.jar', '-S', 'gem', 'install','-i', './' +gemJarName, it, '--no-rdoc', '--no-ri'].execute(null, new File("dist")) 
+	proc.consumeProcessOutput(sout, serr)
+	proc.waitFor()
+	println "out> $sout err> $serr"
+  }
+
+}
+
+task gemJar(dependsOn: installGems, type:Jar) {
+	archiveName gemJarName + ".jar"
+	destinationDir new File("dist")
+	from ("dist/" + gemJarName)	
+} 
+
+
+
