@@ -29,5 +29,13 @@ To run sass from inside of the ruby shell, the following works.  The example is 
 
 ```
 
-Sample code (will not compile) can be found in the sample directory.
+Sample code (pulled from other code base.  Will have to implement as makes sense) can be found in the sample directory.
+
+
+Possible future improvements:
+ 
+  * Choose which version of JRuby to download.
+  * Make gems.properties respect versions.
+  * Add support for making a runnable jar that will run the gem requested.
+  
 
