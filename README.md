@@ -33,7 +33,8 @@ Sample code (pulled from other code base.  Will have to implement as makes sense
 
 
 Possible future improvements:
- 
+
+  * Include gradle wrapper so this will just work
   * Choose which version of JRuby to download.
   * Make gems.properties respect versions.
   * Add support for making a runnable jar that will run the gem requested.
